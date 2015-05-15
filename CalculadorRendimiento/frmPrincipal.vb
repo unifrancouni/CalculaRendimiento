@@ -6,12 +6,19 @@
 ' 003: Dos variables del mismo concepto no pueden ser vacías.
 
 
+'ESTÁNDAR:
+'----------------------------------------------------------------------------------------
+'-NOMBRES DE FUNCIONES: EMPIEZAN POR MINÚSCULA, 
+' Y LA PRIMER LETRA DE CADA PALABRA DIFERENTE EN MAYÚSCULA.
+'-COLOCAR UN COMENTARIO DE LA FUNCIÓN QUE REALIZA CADA MÉTDODO
+
 
 Imports SingularSys.Jep
 Imports System.Text.RegularExpressions
 
 
 Public Class frmPrincipal
+
 
 #Region "Variables Globales"
 
@@ -23,10 +30,7 @@ Public Class frmPrincipal
 
     Private Sub frmPrincipal_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'j = New JepInstance()
-
-        'j.AddVariable("x", 5)
-        'j.ReinitializeComponents()
-        'j.Parse("1e3")
+        'j.Parse("2+4*5")
         'MsgBox(j.Evaluate().ToString)
 
     End Sub
@@ -165,43 +169,36 @@ Public Class frmPrincipal
 
     Private Sub btnClearNa_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearNa.Click
         txtNa.Text = ""
-        txtNa.Tag = "0"
         txtNa.BackColor = Color.White
     End Sub
 
     Private Sub btnClearNb_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearNb.Click
         txtNb.Text = ""
-        txtNb.Tag = "0"
         txtNb.BackColor = Color.White
     End Sub
 
     Private Sub btnClearCPIa_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearCPIa.Click
         txtCPIa.Text = ""
-        txtCPIa.Tag = "0"
         txtCPIa.BackColor = Color.White
     End Sub
 
     Private Sub btnClearCPIb_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearCPIb.Click
         txtCPIb.Text = ""
-        txtCPIb.Tag = "0"
         txtCPIb.BackColor = Color.White
     End Sub
 
     Private Sub btnClearFa_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearFa.Click
         txtFa.Text = ""
-        txtFa.Tag = "0"
         txtFa.BackColor = Color.White
     End Sub
 
     Private Sub btnClearFb_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearFb.Click
         txtFb.Text = ""
-        txtFb.Tag = "0"
         txtFb.BackColor = Color.White
     End Sub
 
     Private Sub btnClear_n_b_a_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClear_n_b_a.Click
         txt_n_b_a.Text = ""
-        txt_n_b_a.Tag = "0"
         txt_n_b_a.BackColor = Color.White
     End Sub
 
@@ -220,6 +217,7 @@ Public Class frmPrincipal
 #Region "Funciones"
 
     Private Sub addText(ByRef textBox As TextBox, ByVal str As String)
+        'AGREGA UN TEXTO A UN TEXTBOX
         textBox.Text &= str
         textBox.SelectionStart = textBox.TextLength
     End Sub
@@ -240,7 +238,7 @@ Public Class frmPrincipal
         Return False
     End Function
 
-    Private Function CantidadImplicitas() As Integer
+    Private Function cantidadImplicitas() As Integer
         'DEVUELVE LA CANTIDAD DE TEXTOS QUE SON IMPLÍCITOS
         Dim ci As Integer = 0
         If esImplicita(txtNa.Text) Then
@@ -267,7 +265,7 @@ Public Class frmPrincipal
         Return ci
     End Function
 
-    Private Function CantidadVacias() As Integer
+    Private Function cantidadVacias() As Integer
         'DEVUELVE LA CANTIDAD DE TEXTOX QUE SON VACÍOS
         Dim cv As Integer = 0
         If esVacia(txtNa.Text) Then
@@ -294,7 +292,7 @@ Public Class frmPrincipal
         Return cv
     End Function
 
-    Private Function CantidadNumeros() As Integer
+    Private Function cantidadNumeros() As Integer
         'DEVUELVE LA CANTIDAD DE TEXTOS QUE SON NÚMEROS
         Return 7 - CantidadImplicitas() - CantidadVacias()
     End Function
