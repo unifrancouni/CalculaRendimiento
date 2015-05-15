@@ -1,9 +1,15 @@
 ﻿' Códigos de error:
 ' -------------------------------------------------------------------------------------
-' 000: N% no puede ser implícita.
-' 001: La cantidad de números reales, ecuaciones implícitas, o vacías no es válida.
-' 001: Dos variables del mismo concepto no pueden ser implícitas.
-' 003: Dos variables del mismo concepto no pueden ser vacías.
+' 000: Los datos tienen que cumplir con el formato especificado.
+' 001: N% no puede ser implícita.
+' 002: Los datos exceden la máxima cantidad de variables numéricas.
+' 003: Los datos exceden la máxima cantidad de variables implícitas.
+' 004: Los datos exceden la máxima cantidad de variables vacías.
+' 005: Debe haber al menos 1 variable vacía.
+' 006: La cantidad de variables implícitas no debe exceder las vacías.
+' 007: Dos variables del mismo concepto no pueden ser implícitas.
+' 008: Dos variables del mismo concepto no pueden ser vacías.
+' 009: Los datos ingresados no tienen lógica matemática.
 
 
 'ESTÁNDAR:

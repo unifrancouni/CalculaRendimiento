@@ -1,9 +1,15 @@
 ﻿' Códigos de error:
 ' -------------------------------------------------------------------------------------
-' 000: N% no puede ser implícita.
-' 001: La cantidad de números reales, ecuaciones implícitas, o vacías no es válida.
-' 001: Dos variables del mismo concepto no pueden ser implícitas.
-' 003: Dos variables del mismo concepto no pueden ser vacías.
+' 000: Los datos tienen que cumplir con el formato especificado.
+' 001: N% no puede ser implícita.
+' 002: Los datos exceden la máxima cantidad de variables numéricas.
+' 003: Los datos exceden la máxima cantidad de variables implícitas.
+' 004: Los datos exceden la máxima cantidad de variables vacías.
+' 005: Debe haber al menos 1 variable vacía.
+' 006: La cantidad de variables implícitas no debe exceder las vacías.
+' 007: Dos variables del mismo concepto no pueden ser implícitas.
+' 008: Dos variables del mismo concepto no pueden ser vacías.
+' 009: Los datos ingresados no tienen lógica matemática.
 
 
 'ESTÁNDAR:
@@ -29,9 +35,11 @@ Public Class frmPrincipal
 #Region "Eventos Form"
 
     Private Sub frmPrincipal_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'j = New JepInstance()
-        'j.Parse("2+4*5")
-        'MsgBox(j.Evaluate().ToString)
+        j = New JepInstance()
+        j.AddVariable("x", 2)
+        j.AddVariable("y", "x*2+1")
+        j.Parse("5+2")
+        MsgBox(j.Evaluate().ToString)
 
     End Sub
 
@@ -57,24 +65,36 @@ Public Class frmPrincipal
     End Sub
 
     Private Function validarBalanceDatos() As Boolean
-        'Balancear los datos de entrada significa, verificar que entren cierta cantidad de números
-        'así como cierta cantidad de ecuaciones implícitas, y que sea válido (quienes pueden y 
-        'quienes no ser implícitos).
-        '   Matemáticamente, existe de dentro de lo posible:
-        '   6 NÚMEROS, 0 IMPLÍCITO, 1 VACÍO
-        '   4 NÚMEROS, 1 IMPLÍCITO, 2 VACÍO 
-        '   2 NÚMEROS, 2 IMPLÍCITO, 3 VACÍO
-        '   0 NÚMEROS, 3 IMPLÍCITO, 4 VACÍO
-        '   TOMANDO EN CUENTA QUE N% NUNCA DEBE SER VACÍA
+        '   BALANCEAR LOS DATOS DE ENTRADA ES VALIDAR EL MÁXIMO Y MÍNIMO DE VARIABLES IMPLÍCITAS, VACÍAS, NUMÉRICAS PERMITIDAS 
+        '   Y LAS SUMA DE TODAS LAS CANTIDADES DEBE SER IGUAL AL TOTAL DE VARIABLES.
+        '   TOMANDO EN CUENTA QUE N% NUNCA DEBE SER IMPLÍCITA
+        '   -------------------------------------------------
+        '   MATEMÁTICAMENTE DENTRO DE LO POSIBLE:
+        '   MÁXIMO IMPLÍCITAS: 3
+        '   MÁXIMO NUMÉRICAS: 6
+        '   MÁXIMO VACÍAS: 4
+        '   MÍNIMO IMPLÍCITAS: 0
+        '   MÍNIMO NUMÉRICAS: 0
+        '   MÍNIMO VACÍAS: 1
+        '   ------ DETALLE ----------------------------------
+        '   6 NÚMEROS, 0 IMPLÍCITOS, 1 VACÍOS
+        '   5 NÚMEROS, 1 IMPLÍCITOS, 1 VACÍOS
+        '   4 NÚMEROS, 1 IMPLÍCITOS, 2 VACÍOS
+        '   3 NÚMEROS, 2 IMPLÍCITOS, 2 VACÍOS
+        '   2 NÚMEROS, 2 IMPLÍCITOS, 3 VACÍOS
+        '   1 NÚMEROS, 3 IMPLÍCITOS, 3 VACÍOS
+        '   0 NÚMEROS, 3 IMPLÍCITOS, 4 VACÍOS
+        '   -------------------------------------------------
+        '   NÓTESE QUE LA CANTIDAD DE VARIABLES IMPLÍCITAS NUNCA ES MAYOR QUE LA CANTIDAD DE VARIABLES VACÍAS
 
         If esImplicita(txt_n_b_a.Text) Then
             MsgBox("N% nunca debe ser implícita.", vbCritical, "Error código: 000")
             Return False
         Else
-            If Not (CantidadImplicitas() = 0 And CantidadNumeros() = 6 And CantidadVacias() = 1) Then
-                If Not (CantidadNumeros() = 4 And CantidadImplicitas() = 1 And CantidadVacias() = 2) Then
-                    If Not (CantidadNumeros() = 2 And CantidadImplicitas() = 2 And CantidadVacias() = 3) Then
-                        If Not (CantidadNumeros() = 0 And CantidadImplicitas() = 3 And CantidadVacias() = 4) Then
+            If Not (cantidadNumeros() = 6 And cantidadImplicitas() = 0 And cantidadVacias() = 1) Then
+                If Not (cantidadNumeros() = 4 And cantidadImplicitas() = 1 And cantidadVacias() = 2) Then
+                    If Not (cantidadNumeros() = 2 And cantidadImplicitas() = 2 And cantidadVacias() = 3) Then
+                        If Not (cantidadNumeros() = 0 And cantidadImplicitas() = 3 And cantidadVacias() = 4) Then
                             MsgBox("La cantidad de números reales, ecuaciones implícitas, o vacías no es válida.", vbCritical, "Error código: 001")
                             Return False
                         End If
@@ -321,5 +341,32 @@ Public Class frmPrincipal
 
 
 
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        j = New JepInstance()
+        If esImplicita(txtNa.Text) Then
+            If Not esVacia(txtNb.Text) Then
+                j.AddVariable("NB", CDbl(txtNb.Text))
+                j.Parse(txtNa.Text)
+                txtNa.Text = j.Evaluate().ToString()
+            Else
+                txtNb.Text = "Incalculable"
+            End If
+        ElseIf Not esVacia(txtNa.Text) Then
+            If esImplicita(txtNb.Text) Then
+                j.AddVariable("NA", CDbl(txtNa.Text))
+                j.Parse(txtNb.Text)
+                txtNb.Text = j.Evaluate().ToString()
+            Else
+                txtNa.Text = "Incalculable"
+            End If
+        End If
+
+    End Sub
+
+
+    Private Function posiblesSiguientesSegunActual()
+
+    End Function
 
 End Class
