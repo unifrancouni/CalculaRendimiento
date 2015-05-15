@@ -72,7 +72,7 @@ Partial Class frmPrincipal
         Me.lblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTitulo.Location = New System.Drawing.Point(23, 9)
         Me.lblTitulo.Name = "lblTitulo"
-        Me.lblTitulo.Size = New System.Drawing.Size(342, 24)
+        Me.lblTitulo.Size = New System.Drawing.Size(352, 24)
         Me.lblTitulo.TabIndex = 0
         Me.lblTitulo.Text = "CALCULADORA DE RENDIMIENTO"
         Me.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -161,8 +161,9 @@ Partial Class frmPrincipal
         Me.txtNa.BackColor = System.Drawing.Color.White
         Me.txtNa.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtNa.Location = New System.Drawing.Point(96, 58)
+        Me.txtNa.MaxLength = 14
         Me.txtNa.Name = "txtNa"
-        Me.txtNa.Size = New System.Drawing.Size(142, 20)
+        Me.txtNa.Size = New System.Drawing.Size(152, 20)
         Me.txtNa.TabIndex = 1
         Me.txtNa.Tag = "0"
         '
@@ -173,8 +174,9 @@ Partial Class frmPrincipal
         Me.txtNb.BackColor = System.Drawing.Color.White
         Me.txtNb.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtNb.Location = New System.Drawing.Point(96, 84)
+        Me.txtNb.MaxLength = 14
         Me.txtNb.Name = "txtNb"
-        Me.txtNb.Size = New System.Drawing.Size(142, 20)
+        Me.txtNb.Size = New System.Drawing.Size(152, 20)
         Me.txtNb.TabIndex = 2
         Me.txtNb.Tag = "0"
         '
@@ -185,8 +187,9 @@ Partial Class frmPrincipal
         Me.txtCPIa.BackColor = System.Drawing.Color.White
         Me.txtCPIa.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtCPIa.Location = New System.Drawing.Point(96, 110)
+        Me.txtCPIa.MaxLength = 14
         Me.txtCPIa.Name = "txtCPIa"
-        Me.txtCPIa.Size = New System.Drawing.Size(142, 20)
+        Me.txtCPIa.Size = New System.Drawing.Size(152, 20)
         Me.txtCPIa.TabIndex = 3
         Me.txtCPIa.Tag = "0"
         '
@@ -197,8 +200,9 @@ Partial Class frmPrincipal
         Me.txtCPIb.BackColor = System.Drawing.Color.White
         Me.txtCPIb.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtCPIb.Location = New System.Drawing.Point(96, 136)
+        Me.txtCPIb.MaxLength = 14
         Me.txtCPIb.Name = "txtCPIb"
-        Me.txtCPIb.Size = New System.Drawing.Size(142, 20)
+        Me.txtCPIb.Size = New System.Drawing.Size(152, 20)
         Me.txtCPIb.TabIndex = 4
         Me.txtCPIb.Tag = "0"
         '
@@ -209,8 +213,9 @@ Partial Class frmPrincipal
         Me.txtFa.BackColor = System.Drawing.Color.White
         Me.txtFa.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtFa.Location = New System.Drawing.Point(96, 162)
+        Me.txtFa.MaxLength = 14
         Me.txtFa.Name = "txtFa"
-        Me.txtFa.Size = New System.Drawing.Size(142, 20)
+        Me.txtFa.Size = New System.Drawing.Size(152, 20)
         Me.txtFa.TabIndex = 5
         Me.txtFa.Tag = "0"
         '
@@ -221,8 +226,9 @@ Partial Class frmPrincipal
         Me.txtFb.BackColor = System.Drawing.Color.White
         Me.txtFb.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtFb.Location = New System.Drawing.Point(96, 188)
+        Me.txtFb.MaxLength = 14
         Me.txtFb.Name = "txtFb"
-        Me.txtFb.Size = New System.Drawing.Size(142, 20)
+        Me.txtFb.Size = New System.Drawing.Size(152, 20)
         Me.txtFb.TabIndex = 6
         Me.txtFb.Tag = "0"
         '
@@ -233,8 +239,9 @@ Partial Class frmPrincipal
         Me.txt_n_b_a.BackColor = System.Drawing.Color.White
         Me.txt_n_b_a.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txt_n_b_a.Location = New System.Drawing.Point(96, 214)
+        Me.txt_n_b_a.MaxLength = 14
         Me.txt_n_b_a.Name = "txt_n_b_a"
-        Me.txt_n_b_a.Size = New System.Drawing.Size(142, 20)
+        Me.txt_n_b_a.Size = New System.Drawing.Size(152, 20)
         Me.txt_n_b_a.TabIndex = 7
         Me.txt_n_b_a.Tag = "0"
         '
@@ -243,7 +250,7 @@ Partial Class frmPrincipal
         Me.btnAddNb.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnAddNb.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAddNb.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddNb.Location = New System.Drawing.Point(271, 56)
+        Me.btnAddNb.Location = New System.Drawing.Point(281, 56)
         Me.btnAddNb.Name = "btnAddNb"
         Me.btnAddNb.Size = New System.Drawing.Size(56, 23)
         Me.btnAddNb.TabIndex = 8
@@ -256,7 +263,7 @@ Partial Class frmPrincipal
         Me.btnClearNa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnClearNa.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClearNa.Image = CType(resources.GetObject("btnClearNa.Image"), System.Drawing.Image)
-        Me.btnClearNa.Location = New System.Drawing.Point(333, 56)
+        Me.btnClearNa.Location = New System.Drawing.Point(343, 56)
         Me.btnClearNa.Name = "btnClearNa"
         Me.btnClearNa.Size = New System.Drawing.Size(39, 23)
         Me.btnClearNa.TabIndex = 14
@@ -268,7 +275,7 @@ Partial Class frmPrincipal
         Me.btnClearNb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnClearNb.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClearNb.Image = CType(resources.GetObject("btnClearNb.Image"), System.Drawing.Image)
-        Me.btnClearNb.Location = New System.Drawing.Point(333, 82)
+        Me.btnClearNb.Location = New System.Drawing.Point(343, 82)
         Me.btnClearNb.Name = "btnClearNb"
         Me.btnClearNb.Size = New System.Drawing.Size(39, 23)
         Me.btnClearNb.TabIndex = 15
@@ -279,7 +286,7 @@ Partial Class frmPrincipal
         Me.btnAddNa.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnAddNa.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAddNa.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddNa.Location = New System.Drawing.Point(271, 82)
+        Me.btnAddNa.Location = New System.Drawing.Point(281, 82)
         Me.btnAddNa.Name = "btnAddNa"
         Me.btnAddNa.Size = New System.Drawing.Size(56, 23)
         Me.btnAddNa.TabIndex = 9
@@ -292,7 +299,7 @@ Partial Class frmPrincipal
         Me.btnClearCPIa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnClearCPIa.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClearCPIa.Image = CType(resources.GetObject("btnClearCPIa.Image"), System.Drawing.Image)
-        Me.btnClearCPIa.Location = New System.Drawing.Point(333, 108)
+        Me.btnClearCPIa.Location = New System.Drawing.Point(343, 108)
         Me.btnClearCPIa.Name = "btnClearCPIa"
         Me.btnClearCPIa.Size = New System.Drawing.Size(39, 23)
         Me.btnClearCPIa.TabIndex = 16
@@ -303,7 +310,7 @@ Partial Class frmPrincipal
         Me.btnAddCPIb.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnAddCPIb.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAddCPIb.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddCPIb.Location = New System.Drawing.Point(271, 108)
+        Me.btnAddCPIb.Location = New System.Drawing.Point(281, 108)
         Me.btnAddCPIb.Name = "btnAddCPIb"
         Me.btnAddCPIb.Size = New System.Drawing.Size(56, 23)
         Me.btnAddCPIb.TabIndex = 10
@@ -316,7 +323,7 @@ Partial Class frmPrincipal
         Me.btnClearCPIb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnClearCPIb.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClearCPIb.Image = CType(resources.GetObject("btnClearCPIb.Image"), System.Drawing.Image)
-        Me.btnClearCPIb.Location = New System.Drawing.Point(333, 134)
+        Me.btnClearCPIb.Location = New System.Drawing.Point(343, 134)
         Me.btnClearCPIb.Name = "btnClearCPIb"
         Me.btnClearCPIb.Size = New System.Drawing.Size(39, 23)
         Me.btnClearCPIb.TabIndex = 17
@@ -327,7 +334,7 @@ Partial Class frmPrincipal
         Me.btnAddCPIa.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnAddCPIa.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAddCPIa.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddCPIa.Location = New System.Drawing.Point(271, 134)
+        Me.btnAddCPIa.Location = New System.Drawing.Point(281, 134)
         Me.btnAddCPIa.Name = "btnAddCPIa"
         Me.btnAddCPIa.Size = New System.Drawing.Size(56, 23)
         Me.btnAddCPIa.TabIndex = 11
@@ -340,7 +347,7 @@ Partial Class frmPrincipal
         Me.btnClearFa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnClearFa.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClearFa.Image = CType(resources.GetObject("btnClearFa.Image"), System.Drawing.Image)
-        Me.btnClearFa.Location = New System.Drawing.Point(333, 160)
+        Me.btnClearFa.Location = New System.Drawing.Point(343, 160)
         Me.btnClearFa.Name = "btnClearFa"
         Me.btnClearFa.Size = New System.Drawing.Size(39, 23)
         Me.btnClearFa.TabIndex = 18
@@ -351,7 +358,7 @@ Partial Class frmPrincipal
         Me.btnAddFb.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnAddFb.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAddFb.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddFb.Location = New System.Drawing.Point(271, 160)
+        Me.btnAddFb.Location = New System.Drawing.Point(281, 160)
         Me.btnAddFb.Name = "btnAddFb"
         Me.btnAddFb.Size = New System.Drawing.Size(56, 23)
         Me.btnAddFb.TabIndex = 12
@@ -364,7 +371,7 @@ Partial Class frmPrincipal
         Me.btnClearFb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnClearFb.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClearFb.Image = CType(resources.GetObject("btnClearFb.Image"), System.Drawing.Image)
-        Me.btnClearFb.Location = New System.Drawing.Point(333, 186)
+        Me.btnClearFb.Location = New System.Drawing.Point(343, 186)
         Me.btnClearFb.Name = "btnClearFb"
         Me.btnClearFb.Size = New System.Drawing.Size(39, 23)
         Me.btnClearFb.TabIndex = 19
@@ -375,7 +382,7 @@ Partial Class frmPrincipal
         Me.btnAddFa.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnAddFa.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAddFa.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddFa.Location = New System.Drawing.Point(271, 186)
+        Me.btnAddFa.Location = New System.Drawing.Point(281, 186)
         Me.btnAddFa.Name = "btnAddFa"
         Me.btnAddFa.Size = New System.Drawing.Size(56, 23)
         Me.btnAddFa.TabIndex = 13
@@ -388,7 +395,7 @@ Partial Class frmPrincipal
         Me.btnClear_n_b_a.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnClear_n_b_a.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClear_n_b_a.Image = CType(resources.GetObject("btnClear_n_b_a.Image"), System.Drawing.Image)
-        Me.btnClear_n_b_a.Location = New System.Drawing.Point(333, 212)
+        Me.btnClear_n_b_a.Location = New System.Drawing.Point(343, 212)
         Me.btnClear_n_b_a.Name = "btnClear_n_b_a"
         Me.btnClear_n_b_a.Size = New System.Drawing.Size(39, 23)
         Me.btnClear_n_b_a.TabIndex = 20
@@ -399,7 +406,7 @@ Partial Class frmPrincipal
         Me.btnCalcular.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCalcular.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCalcular.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCalcular.Location = New System.Drawing.Point(148, 257)
+        Me.btnCalcular.Location = New System.Drawing.Point(158, 257)
         Me.btnCalcular.Name = "btnCalcular"
         Me.btnCalcular.Size = New System.Drawing.Size(90, 23)
         Me.btnCalcular.TabIndex = 21
@@ -411,7 +418,7 @@ Partial Class frmPrincipal
         Me.btnClearAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClearAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClearAll.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClearAll.Location = New System.Drawing.Point(244, 257)
+        Me.btnClearAll.Location = New System.Drawing.Point(254, 257)
         Me.btnClearAll.Name = "btnClearAll"
         Me.btnClearAll.Size = New System.Drawing.Size(128, 23)
         Me.btnClearAll.TabIndex = 22
@@ -428,7 +435,7 @@ Partial Class frmPrincipal
         Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.MenuHighlight
-        Me.Label1.Location = New System.Drawing.Point(206, 214)
+        Me.Label1.Location = New System.Drawing.Point(216, 214)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(32, 20)
         Me.Label1.TabIndex = 23
@@ -440,7 +447,7 @@ Partial Class frmPrincipal
         Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.MenuHighlight
-        Me.Label2.Location = New System.Drawing.Point(206, 188)
+        Me.Label2.Location = New System.Drawing.Point(216, 188)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(32, 20)
         Me.Label2.TabIndex = 24
@@ -452,7 +459,7 @@ Partial Class frmPrincipal
         Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.SystemColors.MenuHighlight
-        Me.Label3.Location = New System.Drawing.Point(206, 162)
+        Me.Label3.Location = New System.Drawing.Point(216, 162)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(32, 20)
         Me.Label3.TabIndex = 25
@@ -464,7 +471,7 @@ Partial Class frmPrincipal
         Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.SystemColors.MenuHighlight
-        Me.Label4.Location = New System.Drawing.Point(206, 136)
+        Me.Label4.Location = New System.Drawing.Point(216, 136)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(32, 20)
         Me.Label4.TabIndex = 26
@@ -476,7 +483,7 @@ Partial Class frmPrincipal
         Me.Label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.SystemColors.MenuHighlight
-        Me.Label5.Location = New System.Drawing.Point(206, 110)
+        Me.Label5.Location = New System.Drawing.Point(216, 110)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(32, 20)
         Me.Label5.TabIndex = 27
@@ -488,7 +495,7 @@ Partial Class frmPrincipal
         Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.SystemColors.MenuHighlight
-        Me.Label6.Location = New System.Drawing.Point(206, 84)
+        Me.Label6.Location = New System.Drawing.Point(216, 84)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(32, 20)
         Me.Label6.TabIndex = 28
@@ -500,7 +507,7 @@ Partial Class frmPrincipal
         Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.SystemColors.MenuHighlight
-        Me.Label7.Location = New System.Drawing.Point(206, 58)
+        Me.Label7.Location = New System.Drawing.Point(216, 58)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(32, 20)
         Me.Label7.TabIndex = 29
@@ -511,7 +518,7 @@ Partial Class frmPrincipal
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(377, 287)
+        Me.ClientSize = New System.Drawing.Size(387, 297)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label5)
@@ -549,6 +556,7 @@ Partial Class frmPrincipal
         Me.Controls.Add(Me.lblNb)
         Me.Controls.Add(Me.lblNA)
         Me.Controls.Add(Me.lblTitulo)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(1000, 325)

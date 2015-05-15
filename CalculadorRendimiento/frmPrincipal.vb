@@ -48,7 +48,11 @@ Public Class frmPrincipal
             txt.BackColor = Color.FromArgb(255, 255, 192, 192)
         Else
             errSintaxisTxt.Clear()
-            txt.BackColor = Color.FromArgb(255, 192, 255, 192)
+            If txt.Text <> "" Then
+                txt.BackColor = Color.FromArgb(255, 192, 255, 192)
+            Else
+                txt.BackColor = Color.FromArgb(255, 255, 255, 255)
+            End If
         End If
     End Sub
 
@@ -142,37 +146,30 @@ Public Class frmPrincipal
 
     Private Sub btnClearNa_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearNa.Click
         txtNa.Text = ""
-        txtNa.BackColor = Color.White
     End Sub
 
     Private Sub btnClearNb_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearNb.Click
         txtNb.Text = ""
-        txtNb.BackColor = Color.White
     End Sub
 
     Private Sub btnClearCPIa_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearCPIa.Click
         txtCPIa.Text = ""
-        txtCPIa.BackColor = Color.White
     End Sub
 
     Private Sub btnClearCPIb_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearCPIb.Click
         txtCPIb.Text = ""
-        txtCPIb.BackColor = Color.White
     End Sub
 
     Private Sub btnClearFa_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearFa.Click
         txtFa.Text = ""
-        txtFa.BackColor = Color.White
     End Sub
 
     Private Sub btnClearFb_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearFb.Click
         txtFb.Text = ""
-        txtFb.BackColor = Color.White
     End Sub
 
     Private Sub btnClear_n_b_a_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClear_n_b_a.Click
         txt_n_b_a.Text = ""
-        txt_n_b_a.BackColor = Color.White
     End Sub
 
     Private Sub btnClearAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearAll.Click
@@ -283,45 +280,31 @@ Public Class frmPrincipal
 
 #Region "Eventos KeyChanged"
     Private Sub txtNa_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtNa.TextChanged
-
         validarFormato(txtNa, "NB")
-
     End Sub
 
     Private Sub txtNb_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtNb.TextChanged
-
         validarFormato(txtNb, "NA")
-
     End Sub
 
     Private Sub txtCPIa_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCPIa.TextChanged
-
         validarFormato(txtCPIa, "CPIB")
-
     End Sub
 
     Private Sub txtCPIb_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCPIb.TextChanged
-
         validarFormato(txtCPIb, "CPIA")
-
     End Sub
 
     Private Sub txtFa_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFa.TextChanged
-
         validarFormato(txtFa, "FB")
-
     End Sub
 
     Private Sub txtFb_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFb.TextChanged
-
         validarFormato(txtFb, "FA")
-
     End Sub
 
     Private Sub txt_n_b_a_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt_n_b_a.TextChanged
-
         validarFormato(txt_n_b_a, "")
-
     End Sub
 
 #End Region
