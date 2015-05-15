@@ -37,39 +37,10 @@ Public Class frmPrincipal
 
 #End Region
 
-#Region "Eventos KeyUp's"
-    'Private Sub txtNa_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNa.KeyUp
-    '    validarKeyPressed(txtNa, e.KeyCode)
-    'End Sub
-
-    'Private Sub txtNb_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNb.KeyUp
-    '    validarKeyPressed(txtNb, e.KeyCode)
-    'End Sub
-
-    'Private Sub txtCPIa_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCPIa.KeyUp
-    '    validarKeyPressed(txtCPIa, e.KeyCode)
-    'End Sub
-
-    'Private Sub txtCPIb_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCPIb.KeyUp
-    '    validarKeyPressed(txtCPIb, e.KeyCode)
-    'End Sub
-
-    'Private Sub txtFa_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFa.KeyUp
-    '    validarKeyPressed(txtFa, e.KeyCode)
-    'End Sub
-
-    'Private Sub txtFb_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtFb.KeyUp
-    '    validarKeyPressed(txtFb, e.KeyCode)
-    'End Sub
-
-    'Private Sub txt_n_b_a_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txt_n_b_a.KeyUp
-    '    validarKeyPressed(txt_n_b_a, e.KeyCode)
-    'End Sub
-#End Region
-
 #Region "Validaciones"
 
     Private Sub validarFormato(ByRef txt As TextBox, ByVal strVar As String)
+        'VALIDA SI UN TEXTO TIENE EL FORMATO CORRECTO: NºREAL|NºREAL*VARIABLE
         '255; 192; 192 ROJO
         '192; 255; 192 VERDE
         If Not Regex.IsMatch(txt.Text, "^(()|([0-9]{1,}(.[0-9]{1,})?(\*" & strVar & ")?))$") Then
@@ -126,6 +97,7 @@ Public Class frmPrincipal
 #End Region
 
 #Region "Botones de Agregar Variable Implícita"
+    'CADA BOTÓN AGREGA SU VARIABLE CORRESPONDIENTE
 
     Private Sub btnAddNb_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddNb.Click
         If txtNa.TextLength > 0 Then
@@ -166,6 +138,7 @@ Public Class frmPrincipal
 #End Region
 
 #Region "Botones de Eliminar"
+    'CADA BOTÓN ELIMINA O LIMPIA UN TEXTBOX CORRESPONDIENTE
 
     Private Sub btnClearNa_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearNa.Click
         txtNa.Text = ""
@@ -203,6 +176,7 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub btnClearAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearAll.Click
+        'LIMPIA TODOS LOS TEXTBOX
         btnClearNa_Click(sender, e)
         btnClearNb_Click(sender, e)
         btnClearCPIa_Click(sender, e)
@@ -224,6 +198,7 @@ Public Class frmPrincipal
 
     Private Function esImplicita(ByVal exp As String) As Boolean
         'DEVUELVE TRUE SI UNA CADENA ES MATEMÁTICAMENTE UNA ECUACIÓN IMPLÍCITA
+        'ES EVIDENTE QUE UNA EXPRESIÓN ES UNA ECUACIÓN IMPLÍCITA SI LLEVA UN *
         If exp.Contains("*") Then
             Return True
         End If
@@ -293,12 +268,13 @@ Public Class frmPrincipal
     End Function
 
     Private Function cantidadNumeros() As Integer
-        'DEVUELVE LA CANTIDAD DE TEXTOS QUE SON NÚMEROS
+        'DEVUELVE LA CANTIDAD DE TEXTOS QUE SON NUMÉRICAS (REAL)
+        'LAS QUE NO ESTÁN VACÍAS NI SON ECUACIONES IMPLÍCITAS, SON NUMÉRICAS
         Return 7 - CantidadImplicitas() - CantidadVacias()
     End Function
 
     Private Function determinarCasoModelo() As Integer
-
+        'EN DESARROLLO (NO TOCAR)
 
         Return -1
     End Function
