@@ -1,0 +1,24 @@
+C:\Users\FRANCO\documents\visual studio 2010\Projects\CalculadorRendimiento\CalculadorRendimiento\bin\Debug\CalculadorRendimiento.exe
+C:\Users\FRANCO\documents\visual studio 2010\Projects\CalculadorRendimiento\CalculadorRendimiento\bin\Debug\CalculadorRendimiento.pdb
+C:\Users\FRANCO\documents\visual studio 2010\Projects\CalculadorRendimiento\CalculadorRendimiento\bin\Debug\CalculadorRendimiento.xml
+C:\Users\FRANCO\documents\visual studio 2010\Projects\CalculadorRendimiento\CalculadorRendimiento\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\FRANCO\documents\visual studio 2010\Projects\CalculadorRendimiento\CalculadorRendimiento\obj\x86\Debug\CalculadorRendimiento.frmPrincipal.resources
+C:\Users\FRANCO\documents\visual studio 2010\Projects\CalculadorRendimiento\CalculadorRendimiento\obj\x86\Debug\CalculadorRendimiento.Resources.resources
+C:\Users\FRANCO\documents\visual studio 2010\Projects\CalculadorRendimiento\CalculadorRendimiento\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\FRANCO\documents\visual studio 2010\Projects\CalculadorRendimiento\CalculadorRendimiento\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\FRANCO\documents\visual studio 2010\Projects\CalculadorRendimiento\CalculadorRendimiento\obj\x86\Debug\CalculadorRendimiento.exe
+C:\Users\FRANCO\documents\visual studio 2010\Projects\CalculadorRendimiento\CalculadorRendimiento\obj\x86\Debug\CalculadorRendimiento.xml
+C:\Users\FRANCO\documents\visual studio 2010\Projects\CalculadorRendimiento\CalculadorRendimiento\obj\x86\Debug\CalculadorRendimiento.pdb
+C:\Users\FRANCO\Documents\Visual Studio 2010\Projects\CalculadorRendimiento\CalculadorRendimiento\obj\x86\Debug\GenerateResource.read.75.tlog
+G:\CalculadorRendimiento\CalculadorRendimiento\obj\x86\Debug\CalculadorRendimiento.exe
+G:\CalculadorRendimiento\CalculadorRendimiento\obj\x86\Debug\CalculadorRendimiento.xml
+G:\CalculadorRendimiento\CalculadorRendimiento\obj\x86\Debug\CalculadorRendimiento.pdb
+G:\CalculadorRendimiento\CalculadorRendimiento\bin\Debug\CalculadorRendimiento.exe
+G:\CalculadorRendimiento\CalculadorRendimiento\bin\Debug\CalculadorRendimiento.pdb
+G:\CalculadorRendimiento\CalculadorRendimiento\bin\Debug\CalculadorRendimiento.xml
+G:\CalculadorRendimiento\CalculadorRendimiento\obj\x86\Debug\ResolveAssemblyReference.cache
+G:\CalculadorRendimiento\CalculadorRendimiento\obj\x86\Debug\CalculadorRendimiento.frmPrincipal.resources
+G:\CalculadorRendimiento\CalculadorRendimiento\obj\x86\Debug\CalculadorRendimiento.Resources.resources
+G:\CalculadorRendimiento\CalculadorRendimiento\obj\x86\Debug\GenerateResource.read.1.tlog
+G:\CalculadorRendimiento\CalculadorRendimiento\obj\x86\Debug\GenerateResource.read.75.tlog
+G:\CalculadorRendimiento\CalculadorRendimiento\obj\x86\Debug\GenerateResource.write.1.tlog
