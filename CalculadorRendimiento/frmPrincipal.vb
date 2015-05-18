@@ -5,10 +5,13 @@
 ' 002: Los datos exceden la máxima cantidad de variables numéricas.
 ' 003: Los datos exceden la máxima cantidad de variables implícitas.
 ' 004: Los datos exceden la máxima cantidad de variables vacías.
-' 005: Debe haber al menos 1 variable vacía.
-' 006: La cantidad de variables implícitas no debe exceder las vacías.
-' 007: Dos variables del mismo concepto no pueden ser implícitas.
-' 008: Dos variables del mismo concepto no pueden ser vacías.
+' 005: Debe haber al menos una variable vacía.
+' 006: Dos variables del mismo concepto no pueden ser implícitas.
+' 007: Dos variables del mismo concepto no pueden ser vacías.
+' 008: Dos variables del mismo concepto solamente pueden tener combinaciones de:
+'      numérica-numérica
+'      numérica-implícita
+'      vacía-implícita
 ' 009: Los datos ingresados no tienen lógica matemática.
 
 
@@ -18,9 +21,9 @@
 ' Y LA PRIMER LETRA DE CADA PALABRA DIFERENTE EN MAYÚSCULA.
 '-COLOCAR UN COMENTARIO DE LA FUNCIÓN QUE REALIZA CADA MÉTDODO
 
-
-Imports SingularSys.Jep
+#Region "IMPORTS"
 Imports System.Text.RegularExpressions
+#End Region
 
 
 Public Class frmPrincipal
@@ -28,19 +31,17 @@ Public Class frmPrincipal
 
 #Region "Variables Globales"
 
-    Dim j As JepInstance
+    Dim __TXT__ERRORS__ As Integer = 0
 
 #End Region
 
 #Region "Eventos Form"
 
     Private Sub frmPrincipal_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        j = New JepInstance()
-        j.AddVariable("x", 2)
-        j.AddVariable("y", "x*2+1")
-        j.Parse("5+2")
-        MsgBox(j.Evaluate().ToString)
-
+        'Dim ev As New Evaluator()
+        'ev.addVariable("NA", "2.2")
+        'ev.Parse("2.2*NA + 3")
+        'MsgBox(ev.Eval())
     End Sub
 
 #End Region
@@ -51,11 +52,16 @@ Public Class frmPrincipal
         'VALIDA SI UN TEXTO TIENE EL FORMATO CORRECTO: NºREAL|NºREAL*VARIABLE
         '255; 192; 192 ROJO
         '192; 255; 192 VERDE
+        '192; 255; 255 AZUL
         If Not Regex.IsMatch(txt.Text, "^(()|([0-9]{1,}(.[0-9]{1,})?(\*" & strVar & ")?))$") Then
             errSintaxisTxt.SetError(txt, IIf(strVar <> "", "El formato correcto es: N°REAL|N°REAL*" & strVar, "El formato correcto es: N°REAL"))
             txt.BackColor = Color.FromArgb(255, 255, 192, 192)
+            txt.Tag = 1
+            actualizarNumeroErrores()
         Else
             errSintaxisTxt.Clear()
+            txt.Tag = 0
+            actualizarNumeroErrores()
             If txt.Text <> "" Then
                 txt.BackColor = Color.FromArgb(255, 192, 255, 192)
             Else
@@ -83,36 +89,79 @@ Public Class frmPrincipal
         '   3 NÚMEROS, 2 IMPLÍCITOS, 2 VACÍOS
         '   2 NÚMEROS, 2 IMPLÍCITOS, 3 VACÍOS
         '   1 NÚMEROS, 3 IMPLÍCITOS, 3 VACÍOS
-        '   0 NÚMEROS, 3 IMPLÍCITOS, 4 VACÍOS
+        '   0 NÚMEROS, 3 IMPLÍCITOS, 4 VACÍOS     'etc (no están todas las posibilidades)
         '   -------------------------------------------------
-        '   NÓTESE QUE LA CANTIDAD DE VARIABLES IMPLÍCITAS NUNCA ES MAYOR QUE LA CANTIDAD DE VARIABLES VACÍAS
+
+        '   VALIDANDO ERRORES
+
+        If __TXT__ERRORS__ > 0 Then
+            control_Error("000", "Los datos tienen que cumplir con el formato especificado.")
+            Return False
+        End If
 
         If esImplicita(txt_n_b_a.Text) Then
-            MsgBox("N% nunca debe ser implícita.", vbCritical, "Error código: 000")
+            control_Error("001", "N% no puede ser implícita.")
             Return False
-        Else
-            If Not (cantidadNumeros() = 6 And cantidadImplicitas() = 0 And cantidadVacias() = 1) Then
-                If Not (cantidadNumeros() = 4 And cantidadImplicitas() = 1 And cantidadVacias() = 2) Then
-                    If Not (cantidadNumeros() = 2 And cantidadImplicitas() = 2 And cantidadVacias() = 3) Then
-                        If Not (cantidadNumeros() = 0 And cantidadImplicitas() = 3 And cantidadVacias() = 4) Then
-                            MsgBox("La cantidad de números reales, ecuaciones implícitas, o vacías no es válida.", vbCritical, "Error código: 001")
-                            Return False
-                        End If
-                    End If
-                End If
-            End If
-            If (esImplicita(txtNa.Text) And esImplicita(txtNb.Text)) _
-                               Or (esImplicita(txtCPIa.Text) And esImplicita(txtCPIb.Text)) _
-                               Or (esImplicita(txtFa.Text) And esImplicita(txtFb.Text)) Then
-                MsgBox("Dos variables del mismo concepto no pueden ser implícitas.", vbCritical, "Error código: 002")
-                Return False
-            End If
-            If (esVacia(txtNa.Text) And esVacia(txtNb.Text)) _
-                Or (esVacia(txtCPIa.Text) And esVacia(txtCPIb.Text)) _
-                Or (esVacia(txtFa.Text) And esVacia(txtFb.Text)) Then
-                MsgBox("Dos variables del mismo concepto no pueden ser vacías.", vbCritical, "Error código: 003")
-                Return False
-            End If
+        End If
+
+        If cantidadNumeros() > 6 Then
+            control_Error("002", "Los datos exceden la máxima cantidad de variables numéricas.")
+            Return False
+        End If
+
+        If cantidadImplicitas() > 3 Then
+            control_Error("003", "Los datos exceden la máxima cantidad de variables implícitas.")
+            Return False
+        End If
+
+        If cantidadVacias() > 4 Then
+            control_Error("004", "Los datos exceden la máxima cantidad de variables vacías.")
+            Return False
+        End If
+
+        If cantidadVacias() < 1 Then
+            control_Error("005", "Debe haber al menos una variable vacía.")
+            Return False
+        End If
+
+        If esImplicita(txtNa.Text) And esImplicita(txtNb.Text) Then
+            control_Error("006", "Dos variables del mismo concepto no pueden ser implícitas.")
+            Return False
+        ElseIf esImplicita(txtCPIa.Text) And esImplicita(txtCPIb.Text) Then
+            control_Error("006", "Dos variables del mismo concepto no pueden ser implícitas.")
+            Return False
+        ElseIf esImplicita(txtFa.Text) And esImplicita(txtFb.Text) Then
+            control_Error("006", "Dos variables del mismo concepto no pueden ser implícitas.")
+            Return False
+        End If
+
+        If esVacia(txtNa.Text) And esVacia(txtNb.Text) Then
+            control_Error("007", "Dos variables del mismo concepto no pueden ser vacías.")
+            Return False
+        ElseIf esVacia(txtCPIa.Text) And esVacia(txtCPIb.Text) Then
+            control_Error("007", "Dos variables del mismo concepto no pueden ser vacías.")
+            Return False
+        ElseIf esVacia(txtFa.Text) And esVacia(txtFb.Text) Then
+            control_Error("007", "Dos variables del mismo concepto no pueden ser vacías.")
+            Return False
+        End If
+
+        If determinarCasoVariable(txtNa, txtNb) = 0 Then
+            control_Error("008", "Dos variables del mismo concepto solamente pueden tener combinaciones de: Nuérica-Numérica, Numérica-Implícita, Vacía-Implícita (Sólo si N% es vacía) y Numérica-Vacía (Sólo si es la única vacía).")
+            control_Error("009", "Los datos ingresados no tienen lógica matemática.")
+            Return False
+        End If
+
+        If determinarCasoVariable(txtCPIa, txtCPIb) = 0 Then
+            control_Error("008", "Dos variables del mismo concepto solamente pueden tener combinaciones de: Nuérica-Numérica, Numérica-Implícita, Vacía-Implícita (Sólo si N% es vacía) y Numérica-Vacía (Sólo si es la única vacía).")
+            control_Error("009", "Los datos ingresados no tienen lógica matemática.")
+            Return False
+        End If
+
+        If determinarCasoVariable(txtFa, txtFb) = 0 Then
+            control_Error("008", "Dos variables del mismo concepto solamente pueden tener combinaciones de: Nuérica-Numérica, Numérica-Implícita, Vacía-Implícita (Sólo si N% es vacía) y Numérica-Vacía (Sólo si es la única vacía).")
+            control_Error("009", "Los datos ingresados no tienen lógica matemática.")
+            Return False
         End If
 
         Return True
@@ -230,6 +279,14 @@ Public Class frmPrincipal
         Return False
     End Function
 
+    Private Function esNumerica(ByVal exp As String) As Boolean
+        'DEVUELVE TRUE SI UNA CADENA ES NUMÉRICA
+        If Not esImplicita(exp) And Not esVacia(exp) Then
+            Return True
+        End If
+        Return False
+    End Function
+
     Private Function cantidadImplicitas() As Integer
         'DEVUELVE LA CANTIDAD DE TEXTOS QUE SON IMPLÍCITOS
         Dim ci As Integer = 0
@@ -287,13 +344,108 @@ Public Class frmPrincipal
     Private Function cantidadNumeros() As Integer
         'DEVUELVE LA CANTIDAD DE TEXTOS QUE SON NUMÉRICAS (REAL)
         'LAS QUE NO ESTÁN VACÍAS NI SON ECUACIONES IMPLÍCITAS, SON NUMÉRICAS
-        Return 7 - CantidadImplicitas() - CantidadVacias()
+        Return 7 - cantidadImplicitas() - cantidadVacias()
     End Function
 
-    Private Function determinarCasoModelo() As Integer
-        'EN DESARROLLO (NO TOCAR)
+    Private Sub actualizarNumeroErrores()
+        'SETEA LA CANTIDAD DE TEXTOX QUE TIENEN ERROR EN __TXT__ERRORS__
+        Dim ce As Integer = 0
+        If txtNa.Tag = 1 Then
+            ce += 1
+        End If
+        If txtNb.Tag = 1 Then
+            ce += 1
+        End If
+        If txtCPIa.Tag = 1 Then
+            ce += 1
+        End If
+        If txtCPIb.Tag = 1 Then
+            ce += 1
+        End If
+        If txtFa.Tag = 1 Then
+            ce += 1
+        End If
+        If txtFb.Tag = 1 Then
+            ce += 1
+        End If
+        If txt_n_b_a.Tag = 1 Then
+            ce += 1
+        End If
+        __TXT__ERRORS__ = ce
+    End Sub
 
-        Return -1
+    Private Sub control_Error(ByVal cod As String, ByVal mensaje As String)
+        MsgBox("Error " & cod & ": " & mensaje, vbCritical, "Error número: " & cod)
+    End Sub
+
+    Private Function determinarCasoVariable(ByRef txt1 As TextBox, ByRef txt2 As TextBox) As Integer
+        ' DEVUELVE EL CÓDIGO DE CASO DE PAREO DE VARIABLES DE MISMO CONCEPTO
+        ' ------------------------------------------------------------------
+        ' CÓDIGOS
+        ' ------------------------------------------------------------------
+        ' 0 | NO ES POSIBLE
+        ' 1 | NUMÉRICA - VACÍA
+        ' 2 | VACÍA - NUMÉRICA
+        ' 3 | NUMÉRICA - NUMÉRICA
+        ' 4 | IMPLÍCITA - NUMÉRICA
+        ' 5 | NUMÉRICA - IMPLÍCITA
+        ' 6 | VACÍA - IMPLÍCITA
+        ' 7 | IMPLÍCITA - VACÍA
+
+        If Not (esImplicita(txt1.Text) And esVacia(txt2.Text) And esVacia(txt_n_b_a.Text)) Then
+            If Not (esVacia(txt1.Text) And esImplicita(txt2.Text) And esVacia(txt_n_b_a.Text)) Then
+                If Not (esNumerica(txt1.Text) And esImplicita(txt2.Text)) Then
+                    If Not (esImplicita(txt1.Text) And esNumerica(txt2.Text)) Then
+                        If Not (esNumerica(txt1.Text) And esNumerica(txt2.Text)) Then
+                            If Not (esVacia(txt1.Text) And esNumerica(txt2.Text) And cantidadVacias() = 1) Then
+                                If Not (esNumerica(txt1.Text) And esVacia(txt2.Text) And cantidadVacias() = 1) Then
+                                    Return 0
+                                End If
+                                Return 1
+                            End If
+                            Return 2
+                        End If
+                        Return 3
+                    End If
+                    Return 4
+                End If
+                Return 5
+            End If
+            Return 6
+        End If
+        Return 7
+    End Function
+
+    Public Sub actualizarCasoModelo()
+        'ACTUALIZA EL CASO DEL MODELO (CONCATENAR LOS CASOS DE CADA VARIABLE EN UN SOLO CASO. EJ: 7360)
+        'EL ÚLTIMO DÍGITO SIGNIFICA: 1 = N% VACÍA; 0 = N% LLENA
+        Dim caso As String = ""
+        caso = determinarCasoVariable(txtNa, txtNb) & determinarCasoVariable(txtCPIa, txtCPIb)
+        caso &= determinarCasoVariable(txtFa, txtFb) & IIf(esVacia(txt_n_b_a.Text), 1, 0)
+        mdModelo.sCaso = caso
+    End Sub
+
+    Public Function detectarPrimerVacia() As String
+        'DEVUELVE EL NOMBRE DE LA PRIMER VARIABLE QUE SE ENCUENTRA VACÍA AL RECORRER DE ARRIBA HACIA ABAJO
+        If esVacia(txtNa.Text) Then
+            Return "NA"
+        End If
+        If esVacia(txtNb.Text) Then
+            Return "NB"
+        End If
+        If esVacia(txtCPIa.Text) Then
+            Return "CPIA"
+        End If
+        If esVacia(txtCPIb.Text) Then
+            Return "CPIB"
+        End If
+        If esVacia(txtFa.Text) Then
+            Return "FA"
+        End If
+        If esVacia(txtFb.Text) Then
+            Return "FB"
+        End If
+        Return ""
     End Function
 
 #End Region
@@ -333,7 +485,10 @@ Public Class frmPrincipal
 
     Private Sub btnCalcular_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCalcular.Click
         If validarBalanceDatos() Then
-            MsgBox("Bien hecho ")
+            'PRECALCULAR
+            mdModelo.Precalcular()
+            'CALCULAR
+            mdModelo.Calcular()
         End If
     End Sub
 
@@ -341,32 +496,15 @@ Public Class frmPrincipal
 
 
 
-
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        j = New JepInstance()
-        If esImplicita(txtNa.Text) Then
-            If Not esVacia(txtNb.Text) Then
-                j.AddVariable("NB", CDbl(txtNb.Text))
-                j.Parse(txtNa.Text)
-                txtNa.Text = j.Evaluate().ToString()
-            Else
-                txtNb.Text = "Incalculable"
-            End If
-        ElseIf Not esVacia(txtNa.Text) Then
-            If esImplicita(txtNb.Text) Then
-                j.AddVariable("NA", CDbl(txtNa.Text))
-                j.Parse(txtNb.Text)
-                txtNb.Text = j.Evaluate().ToString()
-            Else
-                txtNa.Text = "Incalculable"
-            End If
-        End If
-
-    End Sub
-
-
-    Private Function posiblesSiguientesSegunActual()
-
-    End Function
-
 End Class
+
+
+#Region "INTEGRANTES"
+' INTEGRANTES:
+' ---------------------------------------
+' FRANCO UGARTE
+' MARÍA ESTEHR GRANADOS
+' TATIANA CONTRERAS
+' SULEYKA JUÁREZ
+' PABLO AGUILAR
+#End Region
