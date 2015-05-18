@@ -34,3 +34,15 @@ E:\AMC3\CalculaRendimiento\CalculadorRendimiento\obj\x86\Debug\CalculadorRendimi
 E:\AMC3\CalculaRendimiento\CalculadorRendimiento\obj\x86\Debug\GenerateResource.read.1.tlog
 E:\AMC3\CalculaRendimiento\CalculadorRendimiento\obj\x86\Debug\GenerateResource.read.75.tlog
 E:\AMC3\CalculaRendimiento\CalculadorRendimiento\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\franco.ugarte\Desktop\amc3\CalculaRendimiento\CalculadorRendimiento\obj\x86\Debug\CalculadorRendimiento.xml
+C:\Users\franco.ugarte\Desktop\amc3\CalculaRendimiento\CalculadorRendimiento\obj\x86\Debug\CalculadorRendimiento.pdb
+C:\Users\franco.ugarte\Desktop\amc3\CalculaRendimiento\CalculadorRendimiento\bin\Debug\CalculadorRendimiento.exe
+C:\Users\franco.ugarte\Desktop\amc3\CalculaRendimiento\CalculadorRendimiento\bin\Debug\CalculadorRendimiento.pdb
+C:\Users\franco.ugarte\Desktop\amc3\CalculaRendimiento\CalculadorRendimiento\bin\Debug\CalculadorRendimiento.xml
+C:\Users\franco.ugarte\Desktop\amc3\CalculaRendimiento\CalculadorRendimiento\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\franco.ugarte\Desktop\amc3\CalculaRendimiento\CalculadorRendimiento\obj\x86\Debug\CalculadorRendimiento.frmPrincipal.resources
+C:\Users\franco.ugarte\Desktop\amc3\CalculaRendimiento\CalculadorRendimiento\obj\x86\Debug\CalculadorRendimiento.Resources.resources
+C:\Users\franco.ugarte\Desktop\amc3\CalculaRendimiento\CalculadorRendimiento\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\franco.ugarte\Desktop\amc3\CalculaRendimiento\CalculadorRendimiento\obj\x86\Debug\GenerateResource.read.75.tlog
+C:\Users\franco.ugarte\Desktop\amc3\CalculaRendimiento\CalculadorRendimiento\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\franco.ugarte\Desktop\amc3\CalculaRendimiento\CalculadorRendimiento\obj\x86\Debug\CalculadorRendimiento.exe

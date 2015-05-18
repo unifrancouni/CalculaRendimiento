@@ -22,7 +22,7 @@
         Dim i As Integer
         If variables.Count > 0 Then
             For i = 0 To variables.Count - 1
-                expresion = expresion.Replace(getVariableName(i), getVariableValue(i))
+                expresion = expresion.Replace(getVariableName(i), "CDbl(" & getVariableValue(i) & ")")
             Next
         End If
         Me.exp = expresion

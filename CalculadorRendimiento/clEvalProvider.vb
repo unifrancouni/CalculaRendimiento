@@ -27,7 +27,7 @@ Public Class clEvalProvider
         sb.Append("Namespace MyEvalNamespace  " & vbCrLf)
         sb.Append("Class MyEvalClass " & vbCrLf)
 
-        sb.Append("public function  EvalCode() as Object " & vbCrLf)
+        sb.Append("public function  EvalCode() as Double " & vbCrLf)
         'sb.Append("YourNamespace.YourBaseClass thisObject = New YourNamespace.YourBaseClass()")
         sb.Append("Return " & vbCode & vbCrLf)
         sb.Append("End Function " & vbCrLf)

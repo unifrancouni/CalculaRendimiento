@@ -70,13 +70,13 @@ Module mdModelo
 
     Private Function obtenerEstadoNBA() As Integer
         If Len(sCaso) = 4 Then
-            Return CInt(Mid(sCaso, 2, 1))
+            Return CInt(Mid(sCaso, 4, 1))
         End If
         Return -1
     End Function
 #End Region
 
-    Public Sub Precalcular()
+    Public Sub precalcular()
         'REALIZA CÁLCULOS CUANDO LA ENTRADA DE LOS DATOS ES INDIRECTA 
         'Y CALCULABLE SIN NECESIDAD DE LA FÓRMULA GENERAL. (CASO 4 Ó 5)
 
@@ -113,55 +113,57 @@ Module mdModelo
 
     End Sub
 
-    Public Sub Calcular()
-        Do
-            frmPrincipal.actualizarCasoModeloSinValidar()
-            If sCaso = "3338" Then
-                'SI TODOS LOS DATOS SON NUMÉRICOS, EXCEPTO N%, CALCULAR N%
-                frmPrincipal.txt_n_b_a.Text = obtenerResultadoEcDespejada("NBA", False)
-                frmPrincipal.txt_n_b_a.BackColor = Color.Gainsboro
-            ElseIf sCaso.Contains("1") Or sCaso.Contains("2") Then
-                'CALCULAR VARIABLE FALTANTE CUANDO SON NUMÉRICAS
-                'ENTONCES ASUMIMOS QUE EL RESTO DE VARIABLES TIENEN CASOS UNICAMENTE 3 (N-N)
-                Dim nVariable As String = detectarVariableFaltante()
-                If nVariable = "NA" Then
-                    frmPrincipal.txtNa.Text = obtenerResultadoEcDespejada("NA", False)
-                    frmPrincipal.txtNa.BackColor = Color.Gainsboro
-                ElseIf nVariable = "NB" Then
-                    frmPrincipal.txtNb.Text = obtenerResultadoEcDespejada("NB", False)
-                    frmPrincipal.txtNb.BackColor = Color.Gainsboro
-                ElseIf nVariable = "CPIA" Then
-                    frmPrincipal.txtCPIa.Text = obtenerResultadoEcDespejada("CPIA", False)
-                    frmPrincipal.txtCPIa.BackColor = Color.Gainsboro
-                ElseIf nVariable = "CPIB" Then
-                    frmPrincipal.txtCPIb.Text = obtenerResultadoEcDespejada("CPIB", False)
-                    frmPrincipal.txtCPIb.BackColor = Color.Gainsboro
-                ElseIf nVariable = "FA" Then
-                    frmPrincipal.txtFa.Text = obtenerResultadoEcDespejada("FA", False)
-                    frmPrincipal.txtFa.BackColor = Color.Gainsboro
-                ElseIf nVariable = "FB" Then
-                    frmPrincipal.txtFb.Text = obtenerResultadoEcDespejada("FB", False)
-                    frmPrincipal.txtFb.BackColor = Color.Gainsboro
-                End If
-            ElseIf sCaso.Contains("6") Or sCaso.Contains("7") Then
-                If obtenerEstadoNBA() = 8 Then
-                    'DEBEMOS CALCULAR N% SUSTITUYENDO VARIABLES NO CALCULADAS POR UN VALOR NUMÉRICO '1'
-                    frmPrincipal.txt_n_b_a.Text = obtenerResultadoEcDespejada("NBA", True)
-                    frmPrincipal.txt_n_b_a.BackColor = Color.Gainsboro
-                ElseIf obtenerEstadoNBA() = 9 Then
-                    'AQUI VAMOS A CALCULAR LA VARIABLE QUE FALTE (LA PRIMERA QUE SE ENCUENTRE) Y ASÍ CÍCLICAMENTE
-
-                End If
+    Public Sub calcular()
+        frmPrincipal.actualizarCasoModelo()
+        If sCaso = "3338" Then
+            'SI TODOS LOS DATOS SON NUMÉRICOS, EXCEPTO N%, CALCULAR N%
+            frmPrincipal.txt_n_b_a.Text = obtenerResultadoEcDespejada("NBA", False)
+            frmPrincipal.txt_n_b_a.BackColor = Color.Gainsboro
+        ElseIf sCaso.Contains("1") Or sCaso.Contains("2") Then
+            'CALCULAR VARIABLE FALTANTE CUANDO SON NUMÉRICAS
+            'ENTONCES ASUMIMOS QUE EL RESTO DE VARIABLES TIENEN CASOS UNICAMENTE 3 (N-N)
+            Dim nVariable As String = detectarVariableFaltante()
+            If nVariable = "NA" Then
+                frmPrincipal.txtNa.Text = obtenerResultadoEcDespejada("NA", False)
+                frmPrincipal.txtNa.BackColor = Color.Gainsboro
+            ElseIf nVariable = "NB" Then
+                frmPrincipal.txtNb.Text = obtenerResultadoEcDespejada("NB", False)
+                frmPrincipal.txtNb.BackColor = Color.Gainsboro
+            ElseIf nVariable = "CPIA" Then
+                frmPrincipal.txtCPIa.Text = obtenerResultadoEcDespejada("CPIA", False)
+                frmPrincipal.txtCPIa.BackColor = Color.Gainsboro
+            ElseIf nVariable = "CPIB" Then
+                frmPrincipal.txtCPIb.Text = obtenerResultadoEcDespejada("CPIB", False)
+                frmPrincipal.txtCPIb.BackColor = Color.Gainsboro
+            ElseIf nVariable = "FA" Then
+                frmPrincipal.txtFa.Text = obtenerResultadoEcDespejada("FA", False)
+                frmPrincipal.txtFa.BackColor = Color.Gainsboro
+            ElseIf nVariable = "FB" Then
+                frmPrincipal.txtFb.Text = obtenerResultadoEcDespejada("FB", False)
+                frmPrincipal.txtFb.BackColor = Color.Gainsboro
             End If
-            frmPrincipal.actualizarCasoModeloSinValidar()
-        Loop Until sCaso = "3339"
+        ElseIf sCaso.Contains("6") Or sCaso.Contains("7") Then
+            If obtenerEstadoNBA() = 8 Then
+                'DEBEMOS CALCULAR N% SUSTITUYENDO VARIABLES NO CALCULADAS POR UN VALOR NUMÉRICO '1'
+                frmPrincipal.txt_n_b_a.Text = obtenerResultadoEcDespejada("NBA", True)
+                frmPrincipal.txt_n_b_a.BackColor = Color.Gainsboro
+            ElseIf obtenerEstadoNBA() = 9 Then
+                'ES LO ÚNICO QUE HEMOS PODIDO CALCULAR, YA QUE LO DEMÁS
+                'NO HAY ECUACIONES SUFICIENTES PARA CALCULARLO,
+                'SÓLO SABRÍAMOS UNA RELACION ENTRE LAS VARIABLES DEL MISMO CONCEPTO QUE FALTEN
+                'EJEMPLO: NA/NB = 1/3
+                sCaso = "3339"
+            End If
+        End If
+        frmPrincipal.actualizarCasoModelo()
     End Sub
 
     Private Function metodoSustitucionNumerica(ByVal nomVar As String, ByVal valVar As String, ByVal exp As String) As String
         Dim ev As New clEvaluator()
         ev.addVariable(nomVar, valVar)
         ev.Parse(exp)
-        Return ev.Eval()
+        Dim ret As String = ev.Eval()
+        Return ret
     End Function
 
     Private Function ecNa() As String
@@ -257,7 +259,7 @@ Module mdModelo
             End If
         Else
             Dim l As List(Of String)
-            Dim ecuacion As String
+            Dim ecuacion As String = ""
             If nVar = "NBA" Then
                 'PRESUSTITUCION
                 ecuacion = ecNBA()
@@ -268,8 +270,68 @@ Module mdModelo
                         agregarVariableSustituida(l(i), ev)
                     End If
                 Next
-                ev.Parse(ecuacion)
+            ElseIf nVar = "NA" Then
+                'PRESUSTITUCION
+                ecuacion = ecNa()
+                ecuacion = Presustituir(ecuacion)
+                l = frmPrincipal.detectarVariablesNoCalculadas()
+                For i = 0 To l.Count - 1
+                    If l(i) <> nVar Then
+                        agregarVariableSustituida(l(i), ev)
+                    End If
+                Next
+            ElseIf nVar = "NB" Then
+                'PRESUSTITUCION
+                ecuacion = ecNb()
+                ecuacion = Presustituir(ecuacion)
+                l = frmPrincipal.detectarVariablesNoCalculadas()
+                For i = 0 To l.Count - 1
+                    If l(i) <> nVar Then
+                        agregarVariableSustituida(l(i), ev)
+                    End If
+                Next
+            ElseIf nVar = "CPIA" Then
+                'PRESUSTITUCION
+                ecuacion = ecCPIa()
+                ecuacion = Presustituir(ecuacion)
+                l = frmPrincipal.detectarVariablesNoCalculadas()
+                For i = 0 To l.Count - 1
+                    If l(i) <> nVar Then
+                        agregarVariableSustituida(l(i), ev)
+                    End If
+                Next
+            ElseIf nVar = "CPIB" Then
+                'PRESUSTITUCION
+                ecuacion = ecCPIb()
+                ecuacion = Presustituir(ecuacion)
+                l = frmPrincipal.detectarVariablesNoCalculadas()
+                For i = 0 To l.Count - 1
+                    If l(i) <> nVar Then
+                        agregarVariableSustituida(l(i), ev)
+                    End If
+                Next
+            ElseIf nVar = "FA" Then
+                'PRESUSTITUCION
+                ecuacion = ecFa()
+                ecuacion = Presustituir(ecuacion)
+                l = frmPrincipal.detectarVariablesNoCalculadas()
+                For i = 0 To l.Count - 1
+                    If l(i) <> nVar Then
+                        agregarVariableSustituida(l(i), ev)
+                    End If
+                Next
+            ElseIf nVar = "FB" Then
+                'PRESUSTITUCION
+                ecuacion = ecFb()
+                ecuacion = Presustituir(ecuacion)
+                l = frmPrincipal.detectarVariablesNoCalculadas()
+                For i = 0 To l.Count - 1
+                    If l(i) <> nVar Then
+                        agregarVariableSustituida(l(i), ev)
+                    End If
+                Next
             End If
+            ev.Parse(ecuacion)
         End If
 
         Return ev.Eval()
@@ -319,6 +381,30 @@ Module mdModelo
         End If
         Return ec
     End Function
+
+    'Private Sub calcularVariableNoNumerica(ByVal nomVar As String)
+    '    Dim ecuacion As String = ""
+    '    Select Case nomVar
+    '        Case "NA"
+    '            ecuacion = ecNa()
+
+    '        Case "NB"
+    '            ecuacion = ecNb()
+
+    '        Case "CPIA"
+    '            ecuacion = ecCPIa()
+
+    '        Case "CPIB"
+    '            ecuacion = ecCPIb()
+
+    '        Case "FA"
+    '            ecuacion = ecFa()
+
+    '        Case "FB"
+    '            ecuacion = ecFb()
+
+    '    End Select
+    'End Sub
 
 
 End Module

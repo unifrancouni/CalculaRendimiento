@@ -53,7 +53,7 @@ Public Class frmPrincipal
         '255; 192; 192 ROJO
         '192; 255; 192 VERDE
         '192; 255; 255 AZUL
-        If Not Regex.IsMatch(txt.Text, "^(()|([0-9]{1,}(.[0-9]{1,})?(\*" & strVar & ")?))$") Then
+        If Not Regex.IsMatch(txt.Text, "^(()|((-)?[0-9]{1,}(\.[0-9]{1,})?(e[0-9]{1,})?(\*" & strVar & ")?))$") Then
             errSintaxisTxt.SetError(txt, IIf(strVar <> "", "El formato correcto es: N°REAL|N°REAL*" & strVar, "El formato correcto es: N°REAL"))
             txt.BackColor = Color.FromArgb(255, 255, 192, 192)
             txt.Tag = 1
@@ -559,9 +559,9 @@ Public Class frmPrincipal
     Private Sub btnCalcular_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCalcular.Click
         If validarBalanceDatos() Then
             'PRECALCULAR
-            mdModelo.Precalcular()
+            mdModelo.precalcular()
             'CALCULAR
-            mdModelo.Calcular()
+            mdModelo.calcular()
         End If
     End Sub
 
