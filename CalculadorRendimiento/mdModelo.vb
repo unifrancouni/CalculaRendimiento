@@ -244,6 +244,8 @@ Module mdModelo
                 ev.addVariable("FB", frmPrincipal.txtFb.Text)
                 ev.Parse(ecNBA())
             End If
+        Else
+
         End If
 
         Return ev.Eval()
