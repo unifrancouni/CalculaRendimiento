@@ -114,36 +114,47 @@ Module mdModelo
     End Sub
 
     Public Sub Calcular()
-        frmPrincipal.actualizarCasoModelo()
+        Do
+            frmPrincipal.actualizarCasoModeloSinValidar()
+            If sCaso = "3338" Then
+                'SI TODOS LOS DATOS SON NUMÉRICOS, EXCEPTO N%, CALCULAR N%
+                frmPrincipal.txt_n_b_a.Text = obtenerResultadoEcDespejada("NBA", False)
+                frmPrincipal.txt_n_b_a.BackColor = Color.Gainsboro
+            ElseIf sCaso.Contains("1") Or sCaso.Contains("2") Then
+                'CALCULAR VARIABLE FALTANTE CUANDO SON NUMÉRICAS
+                'ENTONCES ASUMIMOS QUE EL RESTO DE VARIABLES TIENEN CASOS UNICAMENTE 3 (N-N)
+                Dim nVariable As String = detectarVariableFaltante()
+                If nVariable = "NA" Then
+                    frmPrincipal.txtNa.Text = obtenerResultadoEcDespejada("NA", False)
+                    frmPrincipal.txtNa.BackColor = Color.Gainsboro
+                ElseIf nVariable = "NB" Then
+                    frmPrincipal.txtNb.Text = obtenerResultadoEcDespejada("NB", False)
+                    frmPrincipal.txtNb.BackColor = Color.Gainsboro
+                ElseIf nVariable = "CPIA" Then
+                    frmPrincipal.txtCPIa.Text = obtenerResultadoEcDespejada("CPIA", False)
+                    frmPrincipal.txtCPIa.BackColor = Color.Gainsboro
+                ElseIf nVariable = "CPIB" Then
+                    frmPrincipal.txtCPIb.Text = obtenerResultadoEcDespejada("CPIB", False)
+                    frmPrincipal.txtCPIb.BackColor = Color.Gainsboro
+                ElseIf nVariable = "FA" Then
+                    frmPrincipal.txtFa.Text = obtenerResultadoEcDespejada("FA", False)
+                    frmPrincipal.txtFa.BackColor = Color.Gainsboro
+                ElseIf nVariable = "FB" Then
+                    frmPrincipal.txtFb.Text = obtenerResultadoEcDespejada("FB", False)
+                    frmPrincipal.txtFb.BackColor = Color.Gainsboro
+                End If
+            ElseIf sCaso.Contains("6") Or sCaso.Contains("7") Then
+                If obtenerEstadoNBA() = 8 Then
+                    'DEBEMOS CALCULAR N% SUSTITUYENDO VARIABLES NO CALCULADAS POR UN VALOR NUMÉRICO '1'
+                    frmPrincipal.txt_n_b_a.Text = obtenerResultadoEcDespejada("NBA", True)
+                    frmPrincipal.txt_n_b_a.BackColor = Color.Gainsboro
+                ElseIf obtenerEstadoNBA() = 9 Then
+                    'AQUI VAMOS A CALCULAR LA VARIABLE QUE FALTE (LA PRIMERA QUE SE ENCUENTRE) Y ASÍ CÍCLICAMENTE
 
-        If sCaso = "3331" Then
-            frmPrincipal.txt_n_b_a.Text = obtenerResultadoEcDespejada("NBA", False)
-            frmPrincipal.txt_n_b_a.BackColor = Color.Gainsboro
-        ElseIf sCaso.Contains("1") Or sCaso.Contains("2") Then
-            'ENTONCES ASUMIMOS QUE EL RESTO DE VARIABLES TIENEN CASOS UNICAMENTE 3 (N-N)
-            Dim nVariable As String = detectarVariableFaltante()
-            If nVariable = "NA" Then
-                frmPrincipal.txtNa.Text = obtenerResultadoEcDespejada("NA", False)
-                frmPrincipal.txtNa.BackColor = Color.Gainsboro
-            ElseIf nVariable = "NB" Then
-                frmPrincipal.txtNb.Text = obtenerResultadoEcDespejada("NB", False)
-                frmPrincipal.txtNb.BackColor = Color.Gainsboro
-            ElseIf nVariable = "CPIA" Then
-                frmPrincipal.txtCPIa.Text = obtenerResultadoEcDespejada("CPIA", False)
-                frmPrincipal.txtCPIa.BackColor = Color.Gainsboro
-            ElseIf nVariable = "CPIB" Then
-                frmPrincipal.txtCPIb.Text = obtenerResultadoEcDespejada("CPIB", False)
-                frmPrincipal.txtCPIb.BackColor = Color.Gainsboro
-            ElseIf nVariable = "FA" Then
-                frmPrincipal.txtFa.Text = obtenerResultadoEcDespejada("FA", False)
-                frmPrincipal.txtFa.BackColor = Color.Gainsboro
-            ElseIf nVariable = "FB" Then
-                frmPrincipal.txtFb.Text = obtenerResultadoEcDespejada("FB", False)
-                frmPrincipal.txtFb.BackColor = Color.Gainsboro
+                End If
             End If
-        End If
-
-        frmPrincipal.actualizarCasoModelo()
+            frmPrincipal.actualizarCasoModeloSinValidar()
+        Loop Until sCaso = "3339"
     End Sub
 
     Private Function metodoSustitucionNumerica(ByVal nomVar As String, ByVal valVar As String, ByVal exp As String) As String
@@ -188,68 +199,125 @@ Module mdModelo
 
         If nCambioVar = False Then
             If nVar = "NA" Then
-                ev.addVariable("NBA", frmPrincipal.txt_n_b_a.Text)
-                ev.addVariable("NB", frmPrincipal.txtNb.Text)
-                ev.addVariable("CPIA", frmPrincipal.txtCPIa.Text)
-                ev.addVariable("CPIB", frmPrincipal.txtCPIb.Text)
-                ev.addVariable("FA", frmPrincipal.txtFa.Text)
-                ev.addVariable("FB", frmPrincipal.txtFb.Text)
+                agregarVariable("NBA", ev)
+                agregarVariable("NB", ev)
+                agregarVariable("CPIA", ev)
+                agregarVariable("CPIB", ev)
+                agregarVariable("FA", ev)
+                agregarVariable("FB", ev)
                 ev.Parse(ecNa())
             ElseIf nVar = "NB" Then
-                ev.addVariable("NBA", frmPrincipal.txt_n_b_a.Text)
-                ev.addVariable("NA", frmPrincipal.txtNa.Text)
-                ev.addVariable("CPIA", frmPrincipal.txtCPIa.Text)
-                ev.addVariable("CPIB", frmPrincipal.txtCPIb.Text)
-                ev.addVariable("FA", frmPrincipal.txtFa.Text)
-                ev.addVariable("FB", frmPrincipal.txtFb.Text)
+                agregarVariable("NBA", ev)
+                agregarVariable("NA", ev)
+                agregarVariable("CPIA", ev)
+                agregarVariable("CPIB", ev)
+                agregarVariable("FA", ev)
+                agregarVariable("FB", ev)
                 ev.Parse(ecNb())
             ElseIf nVar = "CPIA" Then
-                ev.addVariable("NBA", frmPrincipal.txt_n_b_a.Text)
-                ev.addVariable("NA", frmPrincipal.txtNa.Text)
-                ev.addVariable("NB", frmPrincipal.txtNb.Text)
-                ev.addVariable("CPIB", frmPrincipal.txtCPIb.Text)
-                ev.addVariable("FA", frmPrincipal.txtFa.Text)
-                ev.addVariable("FB", frmPrincipal.txtFb.Text)
+                agregarVariable("NBA", ev)
+                agregarVariable("NA", ev)
+                agregarVariable("NB", ev)
+                agregarVariable("CPIB", ev)
+                agregarVariable("FA", ev)
+                agregarVariable("FB", ev)
                 ev.Parse(ecCPIa())
             ElseIf nVar = "CPIB" Then
-                ev.addVariable("NBA", frmPrincipal.txt_n_b_a.Text)
-                ev.addVariable("NA", frmPrincipal.txtNa.Text)
-                ev.addVariable("NB", frmPrincipal.txtNb.Text)
-                ev.addVariable("CPIA", frmPrincipal.txtCPIa.Text)
-                ev.addVariable("FA", frmPrincipal.txtFa.Text)
-                ev.addVariable("FB", frmPrincipal.txtFb.Text)
+                agregarVariable("NBA", ev)
+                agregarVariable("NA", ev)
+                agregarVariable("NB", ev)
+                agregarVariable("CPIA", ev)
+                agregarVariable("FA", ev)
+                agregarVariable("FB", ev)
                 ev.Parse(ecCPIb())
             ElseIf nVar = "FA" Then
-                ev.addVariable("NBA", frmPrincipal.txt_n_b_a.Text)
-                ev.addVariable("NA", frmPrincipal.txtNa.Text)
-                ev.addVariable("NB", frmPrincipal.txtNb.Text)
-                ev.addVariable("CPIA", frmPrincipal.txtCPIa.Text)
-                ev.addVariable("CPIB", frmPrincipal.txtCPIb.Text)
-                ev.addVariable("FB", frmPrincipal.txtFb.Text)
+                agregarVariable("NBA", ev)
+                agregarVariable("NA", ev)
+                agregarVariable("NB", ev)
+                agregarVariable("CPIA", ev)
+                agregarVariable("CPIB", ev)
+                agregarVariable("FB", ev)
                 ev.Parse(ecFa())
             ElseIf nVar = "FB" Then
-                ev.addVariable("NBA", frmPrincipal.txt_n_b_a.Text)
-                ev.addVariable("NA", frmPrincipal.txtNa.Text)
-                ev.addVariable("NB", frmPrincipal.txtNb.Text)
-                ev.addVariable("CPIA", frmPrincipal.txtCPIa.Text)
-                ev.addVariable("CPIB", frmPrincipal.txtCPIb.Text)
-                ev.addVariable("FA", frmPrincipal.txtFa.Text)
+                agregarVariable("NBA", ev)
+                agregarVariable("NA", ev)
+                agregarVariable("NB", ev)
+                agregarVariable("CPIA", ev)
+                agregarVariable("CPIB", ev)
+                agregarVariable("FA", ev)
                 ev.Parse(ecFb())
             ElseIf nVar = "NBA" Then
-                ev.addVariable("NA", frmPrincipal.txtNa.Text)
-                ev.addVariable("NB", frmPrincipal.txtNb.Text)
-                ev.addVariable("CPIA", frmPrincipal.txtCPIa.Text)
-                ev.addVariable("CPIB", frmPrincipal.txtCPIb.Text)
-                ev.addVariable("FA", frmPrincipal.txtFa.Text)
-                ev.addVariable("FB", frmPrincipal.txtFb.Text)
+                agregarVariable("NA", ev)
+                agregarVariable("NB", ev)
+                agregarVariable("CPIA", ev)
+                agregarVariable("CPIB", ev)
+                agregarVariable("FA", ev)
+                agregarVariable("FB", ev)
                 ev.Parse(ecNBA())
             End If
         Else
-
+            Dim l As List(Of String)
+            Dim ecuacion As String
+            If nVar = "NBA" Then
+                'PRESUSTITUCION
+                ecuacion = ecNBA()
+                ecuacion = Presustituir(ecuacion)
+                l = frmPrincipal.detectarVariablesNoCalculadas()
+                For i = 0 To l.Count - 1
+                    If l(i) <> nVar Then
+                        agregarVariableSustituida(l(i), ev)
+                    End If
+                Next
+                ev.Parse(ecuacion)
+            End If
         End If
 
         Return ev.Eval()
 
+    End Function
+
+    Public Sub agregarVariable(ByVal nVar As String, ByRef ev As clEvaluator)
+        If nVar = "NA" Then
+            ev.addVariable("NA", frmPrincipal.txtNa.Text)
+        ElseIf nVar = "NB" Then
+            ev.addVariable("NB", frmPrincipal.txtNb.Text)
+        ElseIf nVar = "CPIA" Then
+            ev.addVariable("CPIA", frmPrincipal.txtCPIa.Text)
+        ElseIf nVar = "CPIB" Then
+            ev.addVariable("CPIB", frmPrincipal.txtCPIb.Text)
+        ElseIf nVar = "FA" Then
+            ev.addVariable("FA", frmPrincipal.txtFa.Text)
+        ElseIf nVar = "FB" Then
+            ev.addVariable("FB", frmPrincipal.txtFb.Text)
+        ElseIf nVar = "NBA" Then
+            ev.addVariable("NBA", frmPrincipal.txt_n_b_a.Text)
+        End If
+    End Sub
+
+    Public Sub agregarVariableSustituida(ByVal nVar As String, ByRef ev As clEvaluator)
+        ev.addVariable(nVar, "1")
+    End Sub
+
+    Private Function Presustituir(ByVal ec As String) As String
+        If Not frmPrincipal.esVacia(frmPrincipal.txtNa.Text) Then
+            ec = ec.Replace("NA", frmPrincipal.txtNa.Text)
+        End If
+        If Not frmPrincipal.esVacia(frmPrincipal.txtNb.Text) Then
+            ec = ec.Replace("NB", frmPrincipal.txtNb.Text)
+        End If
+        If Not frmPrincipal.esVacia(frmPrincipal.txtCPIa.Text) Then
+            ec = ec.Replace("CPIA", frmPrincipal.txtCPIa.Text)
+        End If
+        If Not frmPrincipal.esVacia(frmPrincipal.txtCPIb.Text) Then
+            ec = ec.Replace("CPIB", frmPrincipal.txtCPIb.Text)
+        End If
+        If Not frmPrincipal.esVacia(frmPrincipal.txtFa.Text) Then
+            ec = ec.Replace("FA", frmPrincipal.txtFa.Text)
+        End If
+        If Not frmPrincipal.esVacia(frmPrincipal.txtFb.Text) Then
+            ec = ec.Replace("FB", frmPrincipal.txtFb.Text)
+        End If
+        Return ec
     End Function
 
 

@@ -271,7 +271,7 @@ Public Class frmPrincipal
         Return False
     End Function
 
-    Private Function esVacia(ByVal exp As String) As Boolean
+    Public Function esVacia(ByVal exp As String) As Boolean
         'DEVUELVE TRUE SI UNA CADENA ES VACIA
         If String.IsNullOrEmpty(exp) Then
             Return True
@@ -416,12 +416,59 @@ Public Class frmPrincipal
         Return 7
     End Function
 
+    Public Function determinarCasoVariableSinValidar(ByRef txt1 As TextBox, ByRef txt2 As TextBox) As Integer
+        ' DEVUELVE EL CÓDIGO DE CASO DE PAREO DE VARIABLES DE MISMO CONCEPTO
+        ' ------------------------------------------------------------------
+        ' CÓDIGOS
+        ' ------------------------------------------------------------------
+        ' 0 | NO ES POSIBLE
+        ' 1 | NUMÉRICA - VACÍA
+        ' 2 | VACÍA - NUMÉRICA
+        ' 3 | NUMÉRICA - NUMÉRICA
+        ' 4 | IMPLÍCITA - NUMÉRICA
+        ' 5 | NUMÉRICA - IMPLÍCITA
+        ' 6 | VACÍA - IMPLÍCITA
+        ' 7 | IMPLÍCITA - VACÍA
+
+        If Not (esImplicita(txt1.Text) And esVacia(txt2.Text)) Then
+            If Not (esVacia(txt1.Text) And esImplicita(txt2.Text)) Then
+                If Not (esNumerica(txt1.Text) And esImplicita(txt2.Text)) Then
+                    If Not (esImplicita(txt1.Text) And esNumerica(txt2.Text)) Then
+                        If Not (esNumerica(txt1.Text) And esNumerica(txt2.Text)) Then
+                            If Not (esVacia(txt1.Text) And esNumerica(txt2.Text) And cantidadVacias() = 1) Then
+                                If Not (esNumerica(txt1.Text) And esVacia(txt2.Text) And cantidadVacias() = 1) Then
+                                    Return 0
+                                End If
+                                Return 1
+                            End If
+                            Return 2
+                        End If
+                        Return 3
+                    End If
+                    Return 4
+                End If
+                Return 5
+            End If
+            Return 6
+        End If
+        Return 7
+    End Function
+
     Public Sub actualizarCasoModelo()
         'ACTUALIZA EL CASO DEL MODELO (CONCATENAR LOS CASOS DE CADA VARIABLE EN UN SOLO CASO. EJ: 7360)
-        'EL ÚLTIMO DÍGITO SIGNIFICA: 1 = N% VACÍA; 0 = N% LLENA
+        'EL ÚLTIMO DÍGITO SIGNIFICA: 8 = N% VACÍA; 9 = N% LLENA
         Dim caso As String = ""
         caso = determinarCasoVariable(txtNa, txtNb) & determinarCasoVariable(txtCPIa, txtCPIb)
-        caso &= determinarCasoVariable(txtFa, txtFb) & IIf(esVacia(txt_n_b_a.Text), 1, 0)
+        caso &= determinarCasoVariable(txtFa, txtFb) & IIf(esVacia(txt_n_b_a.Text), 8, 9)
+        mdModelo.sCaso = caso
+    End Sub
+
+    Public Sub actualizarCasoModeloSinValidar()
+        'ACTUALIZA EL CASO DEL MODELO (CONCATENAR LOS CASOS DE CADA VARIABLE EN UN SOLO CASO. EJ: 7360)
+        'EL ÚLTIMO DÍGITO SIGNIFICA: 8 = N% VACÍA; 9 = N% LLENA
+        Dim caso As String = ""
+        caso = determinarCasoVariableSinValidar(txtNa, txtNb) & determinarCasoVariableSinValidar(txtCPIa, txtCPIb)
+        caso &= determinarCasoVariableSinValidar(txtFa, txtFb) & IIf(esVacia(txt_n_b_a.Text), 8, 9)
         mdModelo.sCaso = caso
     End Sub
 
@@ -446,6 +493,32 @@ Public Class frmPrincipal
             Return "FB"
         End If
         Return ""
+    End Function
+
+    Public Function detectarVariablesNoCalculadas() As List(Of String)
+        Dim l As New List(Of String)
+        If esVacia(txt_n_b_a.Text) Then
+            l.Add("NBA")
+        End If
+        If esVacia(txtNa.Text) Then
+            l.Add("NA")
+        End If
+        If esVacia(txtNb.Text) Then
+            l.Add("NB")
+        End If
+        If esVacia(txtCPIa.Text) Then
+            l.Add("CPIA")
+        End If
+        If esVacia(txtCPIb.Text) Then
+            l.Add("CPIB")
+        End If
+        If esVacia(txtFa.Text) Then
+            l.Add("FA")
+        End If
+        If esVacia(txtFb.Text) Then
+            l.Add("FB")
+        End If        
+        Return l
     End Function
 
 #End Region
